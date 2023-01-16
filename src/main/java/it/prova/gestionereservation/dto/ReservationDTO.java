@@ -1,5 +1,6 @@
 package it.prova.gestionereservation.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import it.prova.gestionereservation.model.Reservation;
 import it.prova.gestionereservation.repository.reservation.ReservationRepository;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class ReservationDTO {
 
     private Long id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataCreazione;
 
     public Reservation buildReservationModel(){

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,12 +19,12 @@ public class ReservationServiceImpl implements ReservationService{
     private ReservationRepository repository;
 
     @Override
-    public List<Reservation> listAllRoom() {
+    public List<Reservation> listAllReservation() {
         return (List<Reservation>) repository.findAll();
     }
 
     @Override
-    public Reservation caricaSingoloRoom(Long id) {
+    public Reservation caricaSingoloReservation(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -30,7 +32,7 @@ public class ReservationServiceImpl implements ReservationService{
     public Reservation aggiorna(Reservation reservationInstance) {
         Reservation reservationReloaded = repository.findById(reservationInstance.getId()).orElse(null);
         if(reservationReloaded == null) throw new RuntimeException("Element not found");
-        reservationReloaded.setDateCreazione(reservationInstance.getDateCreazione());
+        reservationReloaded.setDataCreazione(reservationInstance.getDataCreazione());
         return repository.save(reservationReloaded);
     }
 
@@ -44,5 +46,10 @@ public class ReservationServiceImpl implements ReservationService{
         Reservation reservationReloaded = repository.findById(idToRemove).orElse(null);
         if(reservationReloaded == null) throw new RuntimeException("Element not found");
         repository.deleteById(idToRemove);
+    }
+
+    @Override
+    public List<Reservation> findByDatacreazione(LocalDate datainizio, LocalDate datafine) {
+        return repository.findAllByDataCreazioneBetween(datainizio,datafine);
     }
 }
