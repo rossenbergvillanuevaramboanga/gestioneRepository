@@ -19,7 +19,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "dataCreazione")
-    private LocalDate dateCreazione;
+    @Column(name = "datacreazione")
+    private LocalDate dataCreazione;
 
 }
