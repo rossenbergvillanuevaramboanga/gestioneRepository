@@ -1,6 +1,7 @@
 FROM maven:3-adoptopenjdk-11 as builder
 WORKDIR /opt
 COPY . .
+
 RUN mvn package
 
 FROM openjdk:11
